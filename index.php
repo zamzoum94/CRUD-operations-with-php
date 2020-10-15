@@ -3,6 +3,11 @@
     include "db/p_orm.php";
     const table = "cards";
     $data = get_all($db, "cards");
+
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        remove_one($db, 'cards', $id);
+    }
 ?>
 
 <html>
@@ -27,12 +32,15 @@
                                         Status : {$card['status']}
                                     </p>
                                     <a href='update.php?id={$card['id']}' class='card-link text-success'>Update</a>
-                                    <a  class='card-link text-danger'>Delete</a>
+                                    <a href='?id={$card['id']}' class='card-link text-danger'>Delete</a>
                                 </div>
                             </div>
                         ";
                     }
                 ?>
+            </div>
+            <div class="row">
+                <a href="card.php"><button class="btn btn-success mt-3">ADD</button></a>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
